@@ -41,7 +41,7 @@
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/your-username/leetvision.git
+   git clone https://github.com/Mohitgoswami18/LeetVision.git
    cd leetvision
    ```
 2. Install dependencies
