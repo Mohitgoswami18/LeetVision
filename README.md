@@ -73,14 +73,19 @@
   Select the dist/ folder
 ```
 
-you can also reffer the sample video below
+you can also reffer the sample video below:
+
+https://github.com/user-attachments/assets/f5224173-9ba7-45a6-ad9f-585c2a7aa4ba
+
+Or Visit here for higher quality video ➡️
+https://drive.google.com/file/d/1Yzlxs668RYbU4j4NEMgnQtlBDudXtO-a/view?usp=drive_link
 
 🤝 Contributing
-Pull requests are welcome. If you have suggestions or ideas, open an issue or submit a PR!
+Pull requests are welcome.
 
 
 
-🌟 Show Your Support
+## 🌟 Show Your Support
 If you like this project, give it a ⭐ on GitHub or share it with your fellow coders!
 
 ![License](https://img.shields.io/github/license/Mohitgoswami18/LeetVision?style=for-the-badge)
