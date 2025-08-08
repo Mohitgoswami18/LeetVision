@@ -73,7 +73,7 @@ const App = () => {
       contents: [{
         parts: [
           { text: "You are a DSA instructor. Give short, direct answers." },
-          { text: `${prompt}:\n\nSolution:\n${solution}` }
+          { text: `${prompt}:\n\ncode:\n${solution}` }
         ]
       }]
     };
@@ -83,13 +83,51 @@ const App = () => {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
-          'X-goog-api-key': 'AIzaSyABuSoxV6fcVxug-yqMt5ZrBk-5lbwOz7M'
+          'X-goog-api-key':"AIzaSyABuSoxV6fcVxug-yqMt5ZrBk-5lbwOz7M",
         },
         body: JSON.stringify(body),
       });
       
       const data = await res.json();
       setResponse(data?.candidates?.[0]?.content?.parts?.[0]?.text || "Error fetching answer.");
+    } catch (error) {
+      setResponse("API Error.");
+    }
+  };
+
+  const callForHint = async (prompt) => {
+    setCurrentView("answer");
+    setResponse("Loading...");
+
+    const body = {
+      contents: [
+        {
+          parts: [
+            { text: "You are a DSA instructor. Give short, direct answers." },
+            { text: `${prompt}:\n\problem:\n${problem}` },
+          ],
+        },
+      ],
+    };
+
+    try {
+      const res = await fetch(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-goog-api-key": "AIzaSyABuSoxV6fcVxug-yqMt5ZrBk-5lbwOz7M",
+          },
+          body: JSON.stringify(body),
+        }
+      );
+
+      const data = await res.json();
+      setResponse(
+        data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+          "Error fetching answer."
+      );
     } catch (error) {
       setResponse("API Error.");
     }
@@ -117,14 +155,14 @@ const App = () => {
       {currentView === 'options' && (
         <div className='flex flex-col gap-2 mt-4'>
           <button 
-            onClick={() => callAI("Give a hint for solving this problem")} 
+            onClick={() => callForHint("Give a hint for solving this problem")} 
             className='border p-1 rounded'
             disabled={!problem}
           >
             Hints
           </button>
           <button 
-            onClick={() => callAI("Estimate time complexity and space complexity of this code. also tell in one word wheter this solution is optimal or not optimal can be optimised")} 
+            onClick={() => callAI("Estimate time complexity and space complexity of this code.")} 
             className='border p-1 rounded'
             disabled={!problem}
           >
